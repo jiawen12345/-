@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金种子移动采集系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, rgba(245, 247, 241, 0.8) 0%, rgba(241, 252, 238, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #5a7d3c 0%, #4a6a30 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            box-shadow: 0 4px 10px rgba(90, 125, 60, 0.3);
+        }
+
+        .logo-icon i {
+            font-size: 28px;
+            color: white;
+        }
+
+        .logo-text {
+            text-align: left;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2d5016;
+            line-height: 1;
+        }
+
+        .logo-subtitle {
+            color: #5a7d3c;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .card-title {
+            font-size: 20px;
+            color: #2d5016;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #5a7d3c;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d0e0c3;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background-color: #f9fdf6;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #7ba052;
+            box-shadow: 0 0 0 2px rgba(123, 160, 82, 0.2);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember input {
+            margin-right: 6px;
+        }
+
+        .forgot-password {
+            color: #7ba052;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background-color: #5a7d3c;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .btn-login:hover {
+            background-color: #4a6a30;
+        }
+
+        .btn-register {
+            background-color: #e8f4e3;
+            color: #5a7d3c;
+            border: 1px solid #d0e0c3;
+        }
+
+        .btn-register:hover {
+            background-color: #d0e0c3;
+        }
+
+        .version {
+            text-align: center;
+            color: #8a9c7a;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .support {
+            text-align: center;
+            color: #8a9c7a;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .register-form {
+            display: none;
+        }
+
+        .back-to-login {
+            color: #7ba052;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .back-to-login:hover {
+            text-decoration: underline;
+        }
+
+        .agreement {
+            font-size: 12px;
+            color: #8a9c7a;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .agreement a {
+            color: #7ba052;
+            text-decoration: none;
+        }
+
+        .agreement a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- 登录界面 -->
+    <div class="container" id="loginContainer">
+        <div class="logo-section">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="logo-text">
+                    <div class="logo">金种子</div>
+                    <div class="logo-subtitle">农业信息化管理平台</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 登录表单 -->
+        <div class="card login-form" id="loginForm">
+            <div class="card-title">用户登录</div>
+            <form id="login">
+                <div class="form-group">
+                    <label class="form-label" for="username">请输入您的账号</label>
+                    <input type="text" class="form-input" id="username" placeholder="请输入账号" value="123123">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">请输入密码</label>
+                    <input type="password" class="form-input" id="password" placeholder="请输入密码" value="123123">
+                </div>
+                <div class="options">
+                    <div class="remember">
+                        <input type="checkbox" id="remember" checked>
+                        <label for="remember">记住密码</label>
+                    </div>
+                    <a href="#" class="forgot-password">忘记密码？</a>
+                </div>
+                <button type="submit" class="btn btn-login">登录</button>
+                <button type="button" class="btn btn-register" id="showRegister">注册账号</button>
+            </form>
+            <div class="version">当前版本：3.0.21.15</div>
+            <div class="support">技术支持：国家农业信息化工程技术研究中心</div>
+        </div>
+
+        <!-- 注册表单 -->
+        <div class="card register-form" id="registerForm">
+            <div class="card-title">用户注册</div>
+            <form id="register">
+                <div class="form-group">
+                    <label class="form-label" for="reg-username">设置用户名</label>
+                    <input type="text" class="form-input" id="reg-username" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reg-phone">手机号码</label>
+                    <input type="tel" class="form-input" id="reg-phone" placeholder="请输入手机号码">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reg-email">电子邮箱</label>
+                    <input type="email" class="form-input" id="reg-email" placeholder="请输入电子邮箱">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reg-password">设置密码</label>
+                    <input type="password" class="form-input" id="reg-password" placeholder="请设置登录密码">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="reg-confirm-password">确认密码</label>
+                    <input type="password" class="form-input" id="reg-confirm-password" placeholder="请再次输入密码">
+                </div>
+                <button type="submit" class="btn btn-login">注册</button>
+                <a href="#" class="back-to-login" id="showLogin">
+                    <i class="fas fa-arrow-left"></i>
+                    返回登录
+                </a>
+                <div class="agreement">
+                    注册即表示同意 <a href="#">《用户协议》</a> 和 <a href="#">《隐私政策》</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 切换登录和注册表单
+        document.getElementById('showRegister').addEventListener('click', function() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        });
+
+        document.getElementById('showLogin').addEventListener('click', function() {
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        });
+
+        // 登录表单提交
+        document.getElementById('login').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                alert('请输入账号和密码');
+                return;
+            }
+
+            // 模拟登录成功
+            alert('登录成功！');
+        });
+
+        // 注册表单提交
+        document.getElementById('register').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('reg-username').value;
+            const phone = document.getElementById('reg-phone').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+            if (!username || !phone || !email || !password || !confirmPassword) {
+                alert('请填写所有必填字段');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致');
+                return;
+            }
+
+            // 模拟注册成功
+            alert('注册成功！请使用新账号登录');
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
